@@ -1,3 +1,4 @@
 # archivos de configuracion
 application/Config.php
 
+tmp/*
