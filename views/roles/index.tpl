@@ -38,7 +38,7 @@
 				{include file="../partials/_mensajes.tpl"}
 
 				{if isset($roles) && count($roles)}
-					<table class="table table-striped projects">
+					<table class="table table-striped table-hover projects">
 						<thead>
 							<tr>
 								<th style="width: 10%">
@@ -60,7 +60,7 @@
 									</td>
 									<td>{$rol.nombre}</td>
 									<td>
-										<a class="btn btn-primary btn-sm" href="#">
+										<a class="btn btn-primary btn-sm" href="{$_layoutParams.root}roles/view/{$rol.id}">
 											<i class="fas fa-folder">
 											</i>
 											View

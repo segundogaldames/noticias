@@ -26,7 +26,7 @@ class roleModel extends Model
 	public function getRoleId($id){
 		$id = (int) $id;
 
-		$rol = $this->_db->prepare("SELECT id, nombre FROM roles WHERE id = ?");
+		$rol = $this->_db->prepare("SELECT id, nombre, created_at, updated_at FROM roles WHERE id = ?");
 		$rol->bindParam(1, $id);
 		$rol->execute();
 

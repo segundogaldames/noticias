@@ -21,6 +21,16 @@ class rolesController extends Controller
 		$this->_view->renderizar('index');
 	}
 
+	public function view($id = null)
+	{
+		$this->verificarRole($id);
+
+		$this->_view->assign('titulo','Rol');
+		$this->_view->assign('title','Detalle del Rol');
+		$this->_view->assign('rol', $this->_role->getRoleId($this->filtrarInt($id)));
+		$this->_view->renderizar('view');
+	}
+
 	public function add(){
 
 		$this->_view->assign('titulo', 'Crear Roles');
@@ -58,10 +68,6 @@ class rolesController extends Controller
 		}
 
 		$this->_view->renderizar('add');
-	}
-
-	public function view($id = null){
-
 	}
 
 
