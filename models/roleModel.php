@@ -45,7 +45,7 @@ class roleModel extends Model
 	public function editRole($id, $nombre){
 		$id = (int) $id;
 
-		$rol = $this->_db->prepare("UPDATE roles SET nombre = ? WHERE id = ?");
+		$rol = $this->_db->prepare("UPDATE roles SET nombre = ?, updated_at = now() WHERE id = ?");
 		$rol->bindParam(1, $nombre);
 		$rol->bindParam(2, $id);
 		$rol->execute();

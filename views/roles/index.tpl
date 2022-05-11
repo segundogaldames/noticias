@@ -65,12 +65,12 @@
 											</i>
 											View
 										</a>
-										<a class="btn btn-info btn-sm" href="#">
+										<a class="btn btn-info btn-sm" href="{$_layoutParams.root}roles/edit/{$rol.id}">
 											<i class="fas fa-pencil-alt">
 											</i>
 											Edit
 										</a>
-										<a class="btn btn-danger btn-sm" href="#">
+										<a class="btn btn-danger btn-sm" href="{$_layoutParams.root}roles/delete/{$rol.id}">
 											<i class="fas fa-trash">
 											</i>
 											Delete

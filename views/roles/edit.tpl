@@ -5,8 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{$title}
-                    </h1>
+                    <h1>{$title} </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -35,30 +34,20 @@
                     </button>
                 </div>
             </div>
-            <div class="card-body p-0">
-                {include file="../partials/_mensajes.tpl"}
-
-                <table class="table table-hover">
-                    <tr>
-                        <th>Rol:</th>
-                        <td>{$rol.nombre}</td>
-                    </tr>
-                    <tr>
-                        <th>Fecha de creación:</th>
-                        <td>{$rol.created_at|date_format:"%d-%m-%Y %H:%M:%S"}</td>
-                    </tr>
-                    <tr>
-                        <th>Fecha de actualización</th>
-                        <td>{$rol.updated_at|date_format:"%d-%m-%Y %H:%M:%S"}</td>
-                    </tr>
-                </table>
+            <div class="card-body p-0 col-md-6">
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">{$title}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    {include file="../partials/_mensajes.tpl"}
+                    {include file="../roles/_form.tpl"}
+                </div>
             </div>
-                <!-- /.card-body -->
+            <!-- /.card-body -->
         </div>
-                <!-- /.card -->
-        <p>
-            <a href="{$_layoutParams.root}roles" class="btn btn-success btn-sm">Volver</a>
-        </p>
+        <!-- /.card -->
 
     </section>
     <!-- /.content -->

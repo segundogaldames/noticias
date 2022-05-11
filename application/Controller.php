@@ -22,7 +22,7 @@ abstract class Controller
 			return $modelo;
 		else:
 			throw new Exception("Error de modelo");
-			
+
 		endif;
 	}
 
@@ -46,7 +46,7 @@ abstract class Controller
 		}
 
 		if (Session::get('msg_error')) {
-			$msg_success = Session::get('msg_error');
+			$msg_error = Session::get('msg_error');
 			$this->_view->assign('_error', $msg_error);
 			Session::destroy('msg_error');
 		}
@@ -60,7 +60,7 @@ abstract class Controller
 			require_once $rutaLibreria;
 		else:
 			throw new Exception("Error de libreria");
-			
+
 		endif;
 	}
 
