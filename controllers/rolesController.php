@@ -42,20 +42,7 @@ class rolesController extends Controller
 
 		if ($this->getAlphaNum('enviar') == CTRL) {
 
-			if (!$this->getTexto('nombre')) {
-				$this->_view->assign('_error','Ingrese el nombre del rol');
-				$this->_view->renderizar('edit');
-				exit;
-			}
-
-			#verificamos que el usuario hizo un cambio
-			$rol = $this->_role->getRoleNombre($this->getTexto('nombre'));
-
-			if ($rol) {
-				$this->_view->assign('_error','El rol ingresado ya existe...modifique el nombre para continuar');
-				$this->_view->renderizar('edit');
-				exit;
-			}
+			$this->validate();
 
 			#actualizar el rol en la tabla roles
 			$rol = $this->_role->editRole(
@@ -84,19 +71,7 @@ class rolesController extends Controller
 		if ($this->getAlphaNum('enviar') == CTRL) {
 			$this->_view->assign('datos', $_POST);
 
-			if (!$this->getAlphaNum('nombre')) {
-				$this->_view->assign('_error', 'Ingrese un nombre para el rol');
-				$this->_view->renderizar('add');
-				exit;
-			}
-
-			$row = $this->_role->getRoleNombre($this->getAlphaNum('nombre'));
-
-			if ($row) {
-				$this->_view->assign('_error', 'El rol ya existe, intente con otro nombre');
-				$this->_view->renderizar('add');
-				exit;
-			}
+			$this->validate();
 
 			$row = $this->_role->addRoles(
 				$this->getAlphaNum('nombre')
@@ -137,6 +112,24 @@ class rolesController extends Controller
 
 		if (!$this->_role->getRoleId($this->filtrarInt($id))) {
 			$this->redireccionar('roles');
+		}
+	}
+
+	#metodo que permite la validacion de campos del formulario roles
+	public function validate()
+	{
+		if (!$this->getAlphaNum('nombre')) {
+			$this->_view->assign('_error', 'Ingrese un nombre para el rol');
+			$this->_view->renderizar('add');
+			exit;
+		}
+
+		$rol = $this->_role->getRoleNombre($this->getTexto('nombre'));
+
+		if ($rol) {
+			$this->_view->assign('_error','El rol ingresado ya existe...intente nuevamente');
+			$this->_view->renderizar('edit');
+			exit;
 		}
 	}
 }
