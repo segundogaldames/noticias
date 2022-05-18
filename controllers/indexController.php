@@ -18,7 +18,7 @@ class indexController extends Controller
 	}
 
 	#################################################
-	public function validate()
+	public function validate($view)
 	{
 
 	}

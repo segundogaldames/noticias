@@ -24,6 +24,17 @@ class usuariosController extends Controller
         $this->_view->renderizar('index');
     }
 
+    public function view($id = null)
+    {
+        $this->validaUsuario($id);
+
+        $this->_view->assign('titulo','Usuarios');
+        $this->_view->assign('title','Detalle de Usuario');
+        $this->_view->assign('usuario', $this->_usuario->getUsuarioId($this->filtrarInt($id)));
+
+        $this->_view->renderizar('view');
+    }
+
     public function add()
     {
         $this->_view->assign('titulo','Usuarios');
@@ -104,5 +115,19 @@ class usuariosController extends Controller
             $this->_view->renderizar('add');
             exit;
         }
+    }
+
+    #########################################################
+    private function validaUsuario($id)
+    {
+        if ($this->filtrarInt($id)) {
+            $usuario = $this->_usuario->getUsuarioId($this->filtrarInt($id));
+
+            if ($usuario) {
+                return true;
+            }
+        }
+
+        $this->redireccionar('usuarios');
     }
 }

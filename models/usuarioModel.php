@@ -15,6 +15,15 @@ class usuarioModel extends Model
         return $usu->fetchall();
     }
 
+    public function getUsuarioId($id)
+    {
+        $usu = $this->_db->prepare('SELECT u.id, u.nombre, u.email, u.fecha_nacimiento, u.status, u.rol_id, r.nombre, u.created_at, u.updated_at FROM usuarios u INNER JOIN roles r ON u.rol_id = r.id WHERE u.id = ?');
+        $usu->bindParam(1, $id);
+        $usu->execute();
+
+        return $usu->fetch();
+    }
+
     public function getUsuarioEmail($email)
     {
         $usu = $this->_db->prepare("SELECT id FROM usuarios WHERE email = ?");

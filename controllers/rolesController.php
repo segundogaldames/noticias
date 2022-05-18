@@ -42,7 +42,7 @@ class rolesController extends Controller
 
 		if ($this->getAlphaNum('enviar') == CTRL) {
 
-			$this->validate();
+			$this->validate('edit');
 
 			#actualizar el rol en la tabla roles
 			$rol = $this->_role->editRole(
@@ -71,7 +71,7 @@ class rolesController extends Controller
 		if ($this->getAlphaNum('enviar') == CTRL) {
 			$this->_view->assign('datos', $_POST);
 
-			$this->validate();
+			$this->validate('add');
 
 			$row = $this->_role->addRoles(
 				$this->getAlphaNum('nombre')
@@ -116,7 +116,7 @@ class rolesController extends Controller
 	}
 
 	#metodo que permite la validacion de campos del formulario roles
-	public function validate()
+	public function validate($view)
 	{
 		if (!$this->getAlphaNum('nombre')) {
 			$this->_view->assign('_error', 'Ingrese un nombre para el rol');
