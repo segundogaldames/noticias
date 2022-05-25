@@ -33,6 +33,18 @@ class usuarioModel extends Model
         return $usu->fetch();
     }
 
+    public function validarUsuario($email, $clave)
+    {
+        $clave = Hash::getHash('sha1', $clave, HASH_KEY);
+
+        $usu = $this->_db->prepare("SELECT u.id, u.nombre, u.email, r.nombre as rol FROM usuarios u INNER JOIN roles r ON u.rol_id = r.id WHERE email = ? AND clave = ? AND status = 1");
+        $usu->bindParam(1, $email);
+        $usu->bindParam(2, $clave);
+        $usu->execute();
+
+        return $usu->fetch();
+    }
+
     public function validaEdit($nombre, $email, $fecha_nacimiento, $status, $rol)
     {
         $usu = $this->_db->prepare("SELECT id FROM usuarios WHERE nombre = ? AND email = ? AND fecha_nacimiento = ? AND status = ? AND rol_id = ?");

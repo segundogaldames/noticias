@@ -6,6 +6,7 @@ class rolesController extends Controller
 	private $_usuario;
 
 	public function __construct(){
+		$this->verificarSession();
 		parent::__construct();
 		$this->_role = $this->loadModel('role');
 	}
