@@ -16,23 +16,42 @@
         <div>
             <label for="rol">Rol</label>
             <select name="rol" class="form-control">
+                {if $button == 'Editar'}
+                    <option value="{$usuario.rol_id}">{$usuario.rol}</option>
+                {/if}
                 <option value="">Seleccione...</option>
                 {foreach from=$roles item=rol}
                     <option value="{$rol.id}">{$rol.nombre}</option>
                 {/foreach}
             </select>
         </div>
-        <div>
-            <label for="clave">Password</label>
-            <input type="password" name="clave" class="form-control" placeholder="Password del usuario" onpaste="return false">
-        </div>
-        <div>
-            <label for="reclave">Confirmar password</label>
-            <input type="password" name="reclave" class="form-control" placeholder="Confirmar password" onpaste="return false">
-        </div>
+        {if $button == 'Editar'}
+            <div>
+                <label for="status">Status</label>
+                <select name="status" class="form-control">
+                    {if $usuario.status == 1}
+                        <option value="{$usuario.status}">Activo</option>
+                        <option value="2">Desactivar</option>
+                    {else}
+                        <option value="{$usuario.status}">Inactivo</option>
+                        <option value="1">Activar</option>
+                    {/if}
+                </select>
+            </div>
+        {/if}
+        {if $button == 'Guardar'}
+            <div>
+                <label for="clave">Password</label>
+                <input type="password" name="clave" class="form-control" placeholder="Password del usuario" onpaste="return false">
+            </div>
+            <div>
+                <label for="reclave">Confirmar password</label>
+                <input type="password" name="reclave" class="form-control" placeholder="Confirmar password" onpaste="return false">
+            </div>
+        {/if}
         <div class="card-footer">
             <input type="hidden" name="enviar" value="{$enviar}">
-            <button type="submit" class="btn btn-outline-dark">Guardar</button>
+            <button type="submit" class="btn btn-outline-dark">{$button}</button>
         </div>
     </div>
 </form>
