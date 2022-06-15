@@ -5,8 +5,8 @@ class indexController extends Controller
 	private $_enlace;
 
 	public function __construct(){
+		$this->verificarSession();
 		parent::__construct();
-
 	}
 
 	public function index()

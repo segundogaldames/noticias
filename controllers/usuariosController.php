@@ -15,6 +15,7 @@ class usuariosController extends Controller
     #mostrar la lista de usuarios del sistema
     public function index()
     {
+        $this->verificarSession();
         $this->verificarMensajes();
 
         $this->_view->assign('titulo','Usuarios');
@@ -26,6 +27,7 @@ class usuariosController extends Controller
 
     public function view($id = null)
     {
+        $this->verificarSession();
         $this->validaUsuario($id);
 
         $this->_view->assign('titulo','Usuarios');
@@ -37,6 +39,7 @@ class usuariosController extends Controller
 
     public function edit($id = null)
     {
+        $this->verificarSession();
         $this->validaUsuario($id);
 
         $this->_view->assign('titulo','Usuarios');
@@ -88,6 +91,8 @@ class usuariosController extends Controller
 
     public function add()
     {
+        $this->verificarSession();
+
         $this->_view->assign('titulo','Usuarios');
         $this->_view->assign('title','Nuevo Usuario');
         $this->_view->assign('enviar', CTRL);
