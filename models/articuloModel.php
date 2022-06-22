@@ -15,7 +15,7 @@ class articuloModel extends Model
 
     public function getArticuloId($id)
     {
-        $art = $this->_db->prepare("SELECT a.id, a.titulo, a.descripcion, a.status, a.created_at, a.updated_at u.nombre as usuario FROM articulos a INNER JOIN usuarios u ON a.usuario_id = u.id WHERE a.id = ?");
+        $art = $this->_db->prepare("SELECT a.id, a.titulo, a.descripcion, a.status, a.created_at, a.updated_at, u.nombre as usuario FROM articulos a INNER JOIN usuarios u ON a.usuario_id = u.id WHERE a.id = ?");
         $art->bindParam(1, $id);
         $art->execute();
 

@@ -21,6 +21,18 @@ class articulosController extends Controller
         $this->_view->renderizar('index');
     }
 
+    public function view($id = null)
+    {
+        $this->validaArticulo($id);
+        $this->verificarMensajes();
+
+        $this->_view->assign('titulo','Articulos');
+        $this->_view->assign('title','Detalle de Artículo');
+        $this->_view->assign('articulo', $this->_articulo->getArticuloId($this->filtrarInt($id)));
+
+        $this->_view->renderizar('view');
+    }
+
     public function add()
     {
         $this->_view->assign('titulo','Articulos');
@@ -52,6 +64,19 @@ class articulosController extends Controller
     }
 
     ###############################################
+    private function validaArticulo($id)
+    {
+        if ($this->filtrarInt($id)) {
+            $articulo = $this->_articulo->getArticuloId($this->filtrarInt($id));
+
+            if ($articulo) {
+                return true;
+            }
+        }
+
+        $this->redireccionar('articulos');
+    }
+
     public function validate($view = null)
     {
         if (!$this->getTexto('titulo')) {
