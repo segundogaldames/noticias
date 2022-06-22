@@ -2,3 +2,6 @@
 application/Config.php
 
 tmp/*
+controllers/categoriasController.php
+models/categoriaModel.php
+views/categorias/*
