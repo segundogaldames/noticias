@@ -44,4 +44,20 @@ class articuloModel extends Model
         $row = $art->rowCount();
         return $row;
     }
+
+    public function editArticulo($id, $titulo, $descripcion, $status)
+    {
+        $usuario = Session::get('usuario_id');
+
+        $art = $this->_db->prepare("UPDATE articulos SET titulo = ?, descripcion = ?, status = ?, updated_at = now(), usuario_id = ? WHERE id = ?");
+        $art->bindParam(1, $titulo);
+        $art->bindParam(2, $descripcion);
+        $art->bindParam(3, $status);
+        $art->bindParam(4, $usuario);
+        $art->bindParam(5, $id);
+        $art->execute();
+
+        $row = $art->rowCount();
+        return $row;
+    }
 }

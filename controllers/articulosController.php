@@ -33,6 +33,39 @@ class articulosController extends Controller
         $this->_view->renderizar('view');
     }
 
+    public function edit($id = null)
+    {
+        $this->validaArticulo($id);
+
+        $this->_view->assign('titulo', 'Articulos');
+        $this->_view->assign('title','Editar Artículo');
+        $this->_view->assign('articulo', $this->_articulo->getArticuloId($this->filtrarInt($id)));
+        $this->_view->assign('enviar', CTRL);
+        $this->_view->assign('button','Editar');
+        $this->_view->assign('ruta','articulos/view/' . $this->filtrarInt($id));
+
+        if ($this->getAlphaNum('enviar') == CTRL) {
+            $this->validate('edit');
+
+            $articulo = $this->_articulo->editArticulo(
+                $this->filtrarInt($id),
+                $this->getTexto('titulo'),
+                $this->getTexto('descripcion'),
+                $this->getInt('status')
+            );
+
+            if ($articulo) {
+                Session::set('msg_success','El artículo se ha modificado correctamente');
+            }else {
+                Session::set('msg_error','El artículo se ha modificado... intente nuevamente');
+            }
+
+            $this->redireccionar('articulos');
+        }
+
+        $this->_view->renderizar('edit');
+    }
+
     public function add()
     {
         $this->_view->assign('titulo','Articulos');
@@ -92,7 +125,12 @@ class articulosController extends Controller
         }
 
         if ($view == 'edit') {
-            # code...
+            if (!$this->getInt('status')) {
+                $this->_view->assign('_error','Seleccione el status del artículo');
+                $this->_view->renderizar($view);
+                exit;
+            }
+
         }else {
             $articulo = $this->_articulo->getArticuloTitulo($this->getTexto('titulo'));
 
