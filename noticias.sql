@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `articulo_categoria`
+--
+
+DROP TABLE IF EXISTS `articulo_categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `articulo_categoria` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `articulo_id` int NOT NULL,
+  `categoria_id` int NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `articulo_categoria`
+--
+
+LOCK TABLES `articulo_categoria` WRITE;
+/*!40000 ALTER TABLE `articulo_categoria` DISABLE KEYS */;
+INSERT INTO `articulo_categoria` VALUES (1,2,3,'2022-06-22 16:17:39','2022-06-22 16:17:39'),(2,2,1,'2022-06-22 16:28:07','2022-06-22 16:28:07'),(3,1,2,'2022-06-22 16:54:01','2022-06-22 16:54:01');
+/*!40000 ALTER TABLE `articulo_categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `articulos`
 --
 
@@ -31,7 +58,7 @@ CREATE TABLE `articulos` (
   `updated_at` datetime DEFAULT NULL,
   `usuario_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,8 +67,34 @@ CREATE TABLE `articulos` (
 
 LOCK TABLES `articulos` WRITE;
 /*!40000 ALTER TABLE `articulos` DISABLE KEYS */;
-INSERT INTO `articulos` VALUES (1,'titulo1','titulo1',1,'2022-06-01 17:13:37','2022-06-01 17:13:37',1),(2,'titulo 2','articulo 2                \r\n            ',1,'2022-06-01 17:16:08','2022-06-01 17:16:08',1);
+INSERT INTO `articulos` VALUES (1,'titulo1','                titulo1\r\n            ',2,'2022-06-01 17:13:37','2022-06-22 14:47:05',1),(2,'titulo 2','articulo 2                \r\n            ',1,'2022-06-01 17:16:08','2022-06-01 17:16:08',1),(3,'Articulo 3','       Articulo 3         \r\n            ',1,'2022-06-15 16:22:46','2022-06-15 16:22:46',1);
 /*!40000 ALTER TABLE `articulos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categorias`
+--
+
+DROP TABLE IF EXISTS `categorias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categorias` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categorias`
+--
+
+LOCK TABLES `categorias` WRITE;
+/*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
+INSERT INTO `categorias` VALUES (1,'Deportes','2022-06-22 15:20:33','2022-06-22 15:24:57'),(2,'Política','2022-06-22 15:25:08','2022-06-22 15:25:08'),(3,'Tecnología','2022-06-22 15:25:18','2022-06-22 15:25:18');
+/*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -110,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-15 14:11:57
+-- Dump completed on 2022-06-22 16:57:13
