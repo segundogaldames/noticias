@@ -2,12 +2,16 @@
 class articulosController extends Controller
 {
     private $_articulo;
+    private $_categoria;
+    private $_articuloCategoria;
 
     public function __construct()
     {
         $this->verificarSession();
         parent::__construct();
         $this->_articulo = $this->loadModel('articulo');
+        $this->_categoria = $this->loadModel('categoria');
+        $this->_articuloCategoria = $this->loadModel('articuloCategoria');
     }
 
     public function index()
@@ -29,6 +33,7 @@ class articulosController extends Controller
         $this->_view->assign('titulo','Articulos');
         $this->_view->assign('title','Detalle de Artículo');
         $this->_view->assign('articulo', $this->_articulo->getArticuloId($this->filtrarInt($id)));
+        $this->_view->assign('categorias', $this->_categoria->getCategoriasArticulo($this->filtrarInt($id)));
 
         $this->_view->renderizar('view');
     }
@@ -94,6 +99,51 @@ class articulosController extends Controller
         }
 
         $this->_view->renderizar('add');
+    }
+
+    public function addCategoria($articulo = null)
+    {
+        $this->validaArticulo($articulo);
+
+        $this->_view->assign('titulo','Artículo Categoria');
+        $this->_view->assign('title','Nueva Categoría');
+        $this->_view->assign('articulo', $this->_articulo->getArticuloId($this->filtrarInt($articulo)));
+        $this->_view->assign('categorias', $this->_categoria->getCategorias());
+        $this->_view->assign('enviar', CTRL);
+
+        if ($this->getAlphaNum('enviar') == CTRL) {
+            if (!$this->getInt('categoria')) {
+                $this->_view->assign('_error','Seleccione una categoría');
+                $this->_view->renderizar('addCategoria');
+                exit;
+            }
+
+            $articuloCategoria = $this->_articuloCategoria->getArticuloCategoria(
+                $this->filtrarInt($articulo),
+                $this->getInt('categoria')
+            );
+
+            if ($articuloCategoria) {
+                $this->_view->assign('_error','La categoría ingresada ya está  asociada a esta noticia... intente con otra');
+                $this->_view->renderizar('addCategoria');
+                exit;
+            }
+
+            $articuloCategoria = $this->_articuloCategoria->addArticuloCategoria(
+                $this->filtrarInt($articulo),
+                $this->getInt('categoria')
+            );
+
+            if ($articuloCategoria) {
+                Session::set('msg_success','La categoría se ha asociado correctamente');
+            }else{
+                Session::set('msg_error','La categoría no se ha posido agregar... intente nuevamente');
+            }
+
+            $this->redireccionar('articulos/view/' . $this->filtrarInt($articulo));
+        }
+
+        $this->_view->renderizar('addCategoria');
     }
 
     ###############################################

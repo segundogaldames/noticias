@@ -64,6 +64,24 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>Categorías:</th>
+                        <td>
+                            {if isset($categorias) && count($categorias)}
+                                <ul>
+                                    {foreach from=$categorias item=categoria}
+                                        <li>
+                                            <a href="{$_layoutParams.root}categorias/view/{$categoria.id}">
+                                                {$categoria.categoria}
+                                            </a>
+                                        </li>
+                                    {/foreach}
+                                </ul>
+                            {else}
+                                Sin categorías
+                            {/if}
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Fecha de creación:</th>
                         <td>{$articulo.created_at|date_format:"%d-%m-%Y %H:%M:%S"}</td>
                     </tr>
@@ -74,6 +92,7 @@
                 </table>
                 <p>
                     <a href="{$_layoutParams.root}articulos" class="btn btn-success">Volver</a>
+                    <a href="{$_layoutParams.root}articulos/addCategoria/{$articulo.id}" class="btn btn-primary">Agregar Categoría</a>
                 </p>
             </div>
             <!-- /.card-body -->
